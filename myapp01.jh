@@ -1,0 +1,90 @@
+
+application {
+  config {
+    baseName myApp01
+    applicationType gateway
+    packageName com.auriz
+    authenticationType jwt
+    prodDatabaseType mongodb
+    clientFramework react
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName myApp02
+    applicationType microservice
+    packageName com.myapp
+    authenticationType jwt
+    prodDatabaseType mongodb
+  }
+  entities A, B
+}
+
+application {
+  config {
+    baseName myApp03
+    applicationType microservice
+    packageName com.myapp
+    authenticationType jwt
+    prodDatabaseType mongodb
+  }
+  entities C
+}
+
+entity User {
+	firstname String
+    lastname String
+    email String
+    phone String
+    password String
+    creationDate Instant
+	updateDate Instant
+	language Language
+    type UserType
+}
+
+  entity Company {
+	name String
+    address1 String
+    address2 String
+    type CompanyType
+    creationDate Instant
+	updateDate Instant
+}
+
+entity Job {
+	name String
+    description String
+    creationDate Instant
+	updateDate Instant
+} 
+
+entity Candidate {
+	firstname String
+    lastname String
+    creationDate Instant
+	updateDate Instant
+} 
+
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
+
+enum UserType {
+    SUPERADMIN, COMPANYADMIN, COMPANYUSER
+}
+
+enum CompanyType {
+    TYPE1, TYPE2, TYPE3
+}
+
+
+relationship OneToOne {
+	User{company} to Company
+}
+
+relationship OneToMany {
+  Job to Candidate
+}
